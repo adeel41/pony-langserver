@@ -1,3 +1,17 @@
+use "net"
+use "Debug"
+
+
 actor Main
     new create(env: Env) =>
-        env.out.print("Hello World")
+        let port = try env.args.apply(1)? else "9192" end
+        env.out.print("Starting Pony Language Server on port: " + port)
+        try
+            TCPListener( env.root as AmbientAuth, 
+                recover LanguageServerTCPListenNotify end,
+                "127.0.0.1",
+                port
+            )
+        else
+            env.out.print("No listener")
+        end
