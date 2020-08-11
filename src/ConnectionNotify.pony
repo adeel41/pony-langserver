@@ -1,12 +1,12 @@
 use "net"
 use "Debug"
-
+use "package:lsp"
 
 class LanguageServerTCPConnectionNotify is TCPConnectionNotify
     fun ref accepted(conn: TCPConnection ref) =>
     try
       (let host, let service) = conn.remote_address().name()?
-      Debug("PLS: accepted from " + host + ":" + service)
+      Debug("PLS: Accepted connection " + host + ":" + service)
       //conn.write("server says hi")
     else
         Debug("PLS: There was an issue accepting the connection")
@@ -20,7 +20,8 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
         //conn.write("hello world")
 
     fun ref received(conn: TCPConnection ref, data: Array[U8] iso, times: USize) : Bool =>
-        Debug("PLS Received: " + String.from_array(consume data) )
+        let envelope = Envelope(consume data)
+        Debug(envelope.content)
         //conn.close()
         true
 
@@ -30,6 +31,6 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
     fun ref closed(conn: TCPConnection ref) =>
         Debug("PLS: Connection Closed")
 
-    fun ref sent(conn: TCPConnection ref, data: (String val | Array[U8 val] val)) : (String val | Array[U8 val] val) =>
-        Debug("PLS: Data sent")
-        data
+    // fun ref sent(conn: TCPConnection ref, data: (String val | Array[U8 val] val)) : (String val | Array[U8 val] val) =>
+    //     Debug("PLS: Data sent")
+    //     data

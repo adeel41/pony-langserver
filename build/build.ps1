@@ -1,6 +1,6 @@
 param ($Operation = "build", $Destination = "")
 
-$validOperations = "build", "copy", "run" 
+$validOperations = "build", "copy", "run", "test"
 
 if ($validOperations -notcontains $Operation) {
     Write-Host "Please provide a valid operation from one of following options:" $validOperations
@@ -19,6 +19,9 @@ function GetOneFolderUp($path) {
 $rootFolder = GetOneFolderUp(GetOneFolderUp($MyInvocation.MyCommand.Definition))
 #$buildFolder = Join-Path $rootFolder "build"
 $srcFolder = Join-Path $rootFolder "src"
+if ($Operation -eq "test") {
+    $srcFolder = Join-Path $srcFolder "lsp"
+}
 $outFolder = Join-Path $rootFolder "out"
 
 function GetRelativePath {
