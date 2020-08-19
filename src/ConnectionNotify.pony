@@ -1,6 +1,6 @@
 use "net"
 use "Debug"
-use "package:lsp"
+use "package:types"
 
 class LanguageServerTCPConnectionNotify is TCPConnectionNotify
     fun ref accepted(conn: TCPConnection ref) =>

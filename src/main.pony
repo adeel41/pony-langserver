@@ -1,5 +1,6 @@
 use "net"
 use "Debug"
+use "package:types"
 
 actor Main
     new create(env: Env) =>
@@ -14,3 +15,7 @@ actor Main
         else
             env.out.print("No listener")
         end
+        
+actor RequestMessageHandler
+    be handle(requestMessage: RequestMessage, env: Env) =>
+        env.out.print("I am handling this")

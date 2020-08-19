@@ -20,7 +20,7 @@ $rootFolder = GetOneFolderUp(GetOneFolderUp($MyInvocation.MyCommand.Definition))
 #$buildFolder = Join-Path $rootFolder "build"
 $srcFolder = Join-Path $rootFolder "src"
 if ($Operation -eq "test") {
-    $srcFolder = Join-Path $srcFolder "lsp"
+    $srcFolder = Join-Path $srcFolder "tests"
 }
 $outFolder = Join-Path $rootFolder "out"
 

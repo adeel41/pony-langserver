@@ -18,30 +18,41 @@ class InitializeParams
     let workDoneToken: (String | I32 | None)
     let workspaceFolders: (List[WorkspaceFolder] | None)
 
-    new create(json: JsonObject) ? =>
+    new create(json: JsonObject box) ? =>
         processId = json.data("processId")? as I64
-        clientInfo = ClientInfo(json.data("clientInfo")? as JsonObject)
-        rootPath = json.data("rootPath")? as String
-        rootUri = json.data("rootUri")? as String
+        clientInfo = None
+        rootPath = None
+        rootUri = None
         initializationOptions = None
-        capabilities = ClientCapabilities(json.data("capabilities")? as JsonObject)?
+        capabilities = ClientCapabilities
         trace = TracingOff
         workDoneToken = None
-        workspaceFolders = None //todo: convert json array to a list end
+        workspaceFolders = None
+        // processId = json.data("processId")? as I64
+        // clientInfo = ClientInfo(json.data("clientInfo")? as JsonObject box)
+        // rootPath = json.data("rootPath")? as String
+        // rootUri = json.data("rootUri")? as String
+        // initializationOptions = None
+        // capabilities = ClientCapabilities(json.data("capabilities")? as JsonObject box)?
+        // trace = TracingOff
+        // workDoneToken = None
+        // workspaceFolders = None //todo: convert json array to a list end
 
 class ClientInfo
     let name: String
     let version: (String | None)
 
-    new create(json: JsonObject) =>
+    new create(json: JsonObject box) =>
         name = ""
         version = None
 
 
 class ClientCapabilities
     let workspace: (Workspace | None)
-    new create(json: JsonObject) ? =>
-        workspace = Workspace(json.data("workspace")? as JsonObject)
+    new create() =>
+        workspace = None
+    // new create(json: JsonObject box) ? =>
+    //     workspace = Workspace(json.data("workspace")? as JsonObject box)
 
 class WorkspaceFolder
     let uri: String
@@ -54,7 +65,7 @@ class WorkspaceFolder
 class Workspace
     let applyEdit : (Bool | None)
     let workspaceEdit: (WorkspaceEditClientCapabilities | None)
-    new create(json: JsonObject) =>
+    new create(json: JsonObject box) =>
         applyEdit = None
         workspaceEdit = None
 
