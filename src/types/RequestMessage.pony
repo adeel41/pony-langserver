@@ -10,9 +10,9 @@ class RequestMessage
         method = json.data("method")? as String
         _params = try json.data("params")? as JsonObject box else None end
 
-    fun get_params() : (None | InitializeParams) ? =>
+    fun get_params() : (None | InitializeParams)? =>
         match method
-        | "initialize" => InitializeParams(_params as JsonObject box)?
+        | "initialize" => InitializeParams(_params as JsonObject box)
         else
-            None            
+            None
         end

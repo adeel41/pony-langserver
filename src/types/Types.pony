@@ -18,9 +18,9 @@ class InitializeParams
     let workDoneToken: (String | I32 | None)
     let workspaceFolders: (List[WorkspaceFolder] | None)
 
-    new create(json: JsonObject box) ? =>
-        processId = json.data("processId")? as I64
-        clientInfo = None
+    new create(json: JsonObject box) =>
+        processId = try json.data("processId")? as I64 else None end
+        clientInfo = try ClientInfo(json.data("clientInfo")? as JsonObject box)? else None end
         rootPath = None
         rootUri = None
         initializationOptions = None
@@ -42,9 +42,9 @@ class ClientInfo
     let name: String
     let version: (String | None)
 
-    new create(json: JsonObject box) =>
-        name = ""
-        version = None
+    new create(json: JsonObject box) ? =>
+        name = try json.data("name")? as String else "" end
+        version = json.data("version")? as String
 
 
 class ClientCapabilities
