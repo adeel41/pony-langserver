@@ -13,4 +13,4 @@ actor Main is TestList
         test(_TestEnvelopeOpen)
         test(_TestRequestMessageCreate)
         test(_TestRequestMessageGetParams)
-        // test(_TestInitialize)
+        test(_TestInitializeParams)

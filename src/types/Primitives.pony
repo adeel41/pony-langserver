@@ -2,3 +2,14 @@ primitive TracingOff
 primitive TracingMessages
 primitive TracingVerbose
 type Tracing is (TracingOff | TracingMessages | TracingVerbose)
+
+primitive ResourceOperationKindCreate
+primitive ResourceOperationKindRename
+primitive ResourceOperationKindDelete
+type ResourceOperationKind is (ResourceOperationKindCreate | ResourceOperationKindRename | ResourceOperationKindDelete)
+
+primitive FailureHandlingKindAbort
+primitive FailureHandlingKindTransactional
+primitive FailureHandlingKindUndo
+primitive FailureHandlingKindTextOnlyTransactional
+type FailureHandlingKind is (FailureHandlingKindAbort | FailureHandlingKindTransactional | FailureHandlingKindUndo | FailureHandlingKindTextOnlyTransactional)

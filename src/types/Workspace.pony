@@ -11,8 +11,8 @@ class Workspace
     let configuration: (Bool | None)
 
     new create(json: JsonObject box) =>
-        applyEdit = None
-        workspaceEdit = None
+        applyEdit = try json.data("applyEdit")? as Bool else None end
+        workspaceEdit = try WorkspaceEditClientCapabilities(json.data("workspaceEdit")? as JsonObject box) else None end
         didChangeConfiguration = None
         didChangeWatchedFiles = None
         symbol = None
