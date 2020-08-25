@@ -13,8 +13,8 @@ class Workspace
     new create(json: JsonObject box) =>
         applyEdit = try json.data("applyEdit")? as Bool else None end
         workspaceEdit = try WorkspaceEditClientCapabilities(json.data("workspaceEdit")? as JsonObject box) else None end
-        didChangeConfiguration = None
-        didChangeWatchedFiles = None
+        didChangeConfiguration = try DidChangeConfigurationClientCapabilities(json.data("didChangeConfiguration")? as JsonObject box) else None end
+        didChangeWatchedFiles = try DidChangeWatchedFilesClientCapabilities(json.data("didChangeWatchedFiles")? as JsonObject box) else None end
         symbol = None
         executeCommand = None
         workspaceFolders = None

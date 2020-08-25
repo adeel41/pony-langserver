@@ -49,25 +49,42 @@ class _TestInitializeParams is UnitTest
         match capabilities.workspace
         | let workspace: Workspace =>
                 h.assert_true(try workspace.applyEdit as Bool else false end)
+                workspaceEditAsserts(h, workspace.workspaceEdit)
 
-                match workspace.workspaceEdit
-                | let workspaceEdit: WorkspaceEditClientCapabilities =>
-                    h.assert_true(try workspaceEdit.documentChanges as Bool else false end)
-                    let resourceOperationsExpected:Array[ResourceOperationKind] = [ResourceOperationKindCreate;ResourceOperationKindRename;ResourceOperationKindDelete]
-                    let emptyResourceOperations: Array[ResourceOperationKind] = []
-
-                    match workspaceEdit.resourceOperations
-                    | let resourceOperations: Array[ResourceOperationKind] =>
-                        h.assert_true( try resourceOperations(0)? is ResourceOperationKindCreate else false end )
-                        h.assert_true( try resourceOperations(1)? is ResourceOperationKindRename else false end )
-                        h.assert_true( try resourceOperations(2)? is ResourceOperationKindDelete else false end )
-                    else
-                        h.fail("workspaceEdit.resourceOperations does not contain ResourceOperationKind")
-                    end                
-                    h.assert_true(workspaceEdit.failureHandling is FailureHandlingKindTextOnlyTransactional)
+                match workspace.didChangeConfiguration
+                | let didChangeConfiguration: DidChangeConfigurationClientCapabilities =>
+                    h.assert_true(try didChangeConfiguration.dynamicRegistration as Bool else false end)
                 else
-                    h.fail("workspace.workspaceEdit is not of type WorkspaceEditClientCapabilities")
+                    h.fail("workspace.didChangeConfiguration is not of type DidChangeConfigurationClientCapabilities")
                 end
+
+                match workspace.didChangeWatchedFiles
+                | let didChangeWatchedFiles: DidChangeWatchedFilesClientCapabilities =>
+                    h.assert_true(try didChangeWatchedFiles.dynamicRegistration as Bool else false end)
+                else
+                    h.fail("workspace.didChangeWatchedFiles is not of type DidChangeWatchedFilesClientCapabilities")
+                end
+
         else
             h.fail("capabilities.workspace is not of type Workspace")
+        end
+
+    fun workspaceEditAsserts(h: TestHelper, workspaceEdit': (WorkspaceEditClientCapabilities|None)) =>
+        match workspaceEdit'
+        | let workspaceEdit: WorkspaceEditClientCapabilities =>
+            h.assert_true(try workspaceEdit.documentChanges as Bool else false end)
+            let resourceOperationsExpected:Array[ResourceOperationKind] = [ResourceOperationKindCreate;ResourceOperationKindRename;ResourceOperationKindDelete]
+            let emptyResourceOperations: Array[ResourceOperationKind] = []
+
+            match workspaceEdit.resourceOperations
+            | let resourceOperations: Array[ResourceOperationKind] =>
+                h.assert_true( try resourceOperations(0)? is ResourceOperationKindCreate else false end )
+                h.assert_true( try resourceOperations(1)? is ResourceOperationKindRename else false end )
+                h.assert_true( try resourceOperations(2)? is ResourceOperationKindDelete else false end )
+            else
+                h.fail("workspaceEdit.resourceOperations does not contain ResourceOperationKind")
+            end                
+            h.assert_true(workspaceEdit.failureHandling is FailureHandlingKindTextOnlyTransactional)
+        else
+            h.fail("workspace.workspaceEdit is not of type WorkspaceEditClientCapabilities")
         end
