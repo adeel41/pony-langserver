@@ -36,12 +36,12 @@ primitive SymbolKindObject
 primitive SymbolKindKey
 primitive SymbolKindNull
 primitive SymbolKindEnumMember
+primitive SymbolKindStruct
 primitive SymbolKindEvent
 primitive SymbolKindOperator
 primitive SymbolKindTypeParameter
 
-type SymbolKind is (
-    | SymbolKindFile
+type SymbolKind is ( SymbolKindFile
     | SymbolKindModule
     | SymbolKindNamespace
     | SymbolKindPackage
@@ -63,6 +63,7 @@ type SymbolKind is (
     | SymbolKindKey
     | SymbolKindNull
     | SymbolKindEnumMember
+    | SymbolKindStruct
     | SymbolKindEvent
     | SymbolKindOperator
     | SymbolKindTypeParameter    

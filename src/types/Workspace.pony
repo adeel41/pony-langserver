@@ -15,7 +15,7 @@ class Workspace
         workspaceEdit = try WorkspaceEditClientCapabilities(json.data("workspaceEdit")? as JsonObject box) else None end
         didChangeConfiguration = try DidChangeConfigurationClientCapabilities(json.data("didChangeConfiguration")? as JsonObject box) else None end
         didChangeWatchedFiles = try DidChangeWatchedFilesClientCapabilities(json.data("didChangeWatchedFiles")? as JsonObject box) else None end
-        symbol = None
-        executeCommand = None
-        workspaceFolders = None
-        configuration = None
+        symbol = try WorkspaceSymbolClientCapabilities(json.data("symbol")? as JsonObject box) else None end
+        executeCommand = try ExecuteCommandClientCapabilities(json.data("executeCommand")? as JsonObject box) else None end
+        workspaceFolders = try json.data("workspaceFolders")? as Bool else None end
+        configuration = try json.data("configuration")? as Bool else None end

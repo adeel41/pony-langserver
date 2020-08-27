@@ -28,22 +28,22 @@ class _TestInitializeParams is UnitTest
             h.assert_eq[I64](19480, try p.processId as I64 else 0 end, "No ProcessId found")
 
             h.assert_false(p.clientInfo is None, "ClientInfo is None")
-            try 
-                clientInfoAsserts(h, p.clientInfo as ClientInfo)
-            else
-                h.fail("p.clientInfo is not of type ClientInfo")
-            end
-
+            clientInfoAsserts(h, p.clientInfo)
             capabilitiesAsserts(h, p.capabilities)
 
         else
             h.fail("Should have received an InitializedParams type")
         end
 
-    fun clientInfoAsserts(h:TestHelper, clientInfo:ClientInfo) =>
-        h.assert_eq[String]("vscode", clientInfo.name)
-        h.assert_false(clientInfo.version is None, "clientInfo.version is None")
-        h.assert_eq[String]("1.47.3", try clientInfo.version as String else "" end) 
+    fun clientInfoAsserts(h:TestHelper, clientInfo': (ClientInfo|None) ) =>
+        match clientInfo'
+        | let clientInfo: ClientInfo =>
+            h.assert_eq[String]("vscode", clientInfo.name)
+            h.assert_false(clientInfo.version is None, "clientInfo.version is None")
+            h.assert_eq[String]("1.47.3", try clientInfo.version as String else "" end)
+        else
+            h.fail("p.clientInfo is not of type ClientInfo")
+        end
 
     fun capabilitiesAsserts(h:TestHelper, capabilities:ClientCapabilities) =>
         match capabilities.workspace
@@ -64,6 +64,24 @@ class _TestInitializeParams is UnitTest
                 else
                     h.fail("workspace.didChangeWatchedFiles is not of type DidChangeWatchedFilesClientCapabilities")
                 end
+
+                match workspace.symbol
+                | let symbol: WorkspaceSymbolClientCapabilities =>
+                    h.assert_true(try symbol.dynamicRegistration as Bool else false end )
+                    h.assert_eq[I32](26, try ((symbol.symbolKind as SymbolKinds).valueSet as Array[SymbolKind]).size().i32() else 0 end)
+                else
+                    h.fail("workspace.symbol is not of type WorkspaceSymbolClientCapabilities")
+                end
+
+                match workspace.executeCommand
+                | let executeCommand: ExecuteCommandClientCapabilities =>
+                    h.assert_true(try executeCommand.dynamicRegistration as Bool else false end)
+                else
+                    h.fail("workspace.executeCommand is not of type ExecuteCommandClientCapabilities")
+                end
+
+                h.assert_true(try workspace.configuration as Bool else false end)
+                h.assert_true(try workspace.workspaceFolders as Bool else false end)
 
         else
             h.fail("capabilities.workspace is not of type Workspace")
