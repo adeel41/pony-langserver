@@ -29,7 +29,8 @@ class _TestInitializeParams is UnitTest
 
             h.assert_false(p.clientInfo is None, "ClientInfo is None")
             clientInfoAsserts(h, p.clientInfo)
-            capabilitiesAsserts(h, p.capabilities)
+            capabilitiesWorkspaceAsserts(h, p.capabilities)
+            capabilitiesTextDocumentAsserts(h, p.capabilities.textDocument)
 
         else
             h.fail("Should have received an InitializedParams type")
@@ -45,7 +46,7 @@ class _TestInitializeParams is UnitTest
             h.fail("p.clientInfo is not of type ClientInfo")
         end
 
-    fun capabilitiesAsserts(h:TestHelper, capabilities:ClientCapabilities) =>
+    fun capabilitiesWorkspaceAsserts(h:TestHelper, capabilities:ClientCapabilities) =>
         match capabilities.workspace
         | let workspace: Workspace =>
                 h.assert_true(try workspace.applyEdit as Bool else false end)
@@ -105,4 +106,13 @@ class _TestInitializeParams is UnitTest
             h.assert_true(workspaceEdit.failureHandling is FailureHandlingKindTextOnlyTransactional)
         else
             h.fail("workspace.workspaceEdit is not of type WorkspaceEditClientCapabilities")
+        end
+
+    fun capabilitiesTextDocumentAsserts(h: TestHelper, textDocument': (TextDocumentClientCapabilities | None)) =>
+        match textDocument'
+        | let textDocument: TextDocumentClientCapabilities =>
+            
+            h.assert_eq[I32](1, 1)
+        else
+            h.fail("capabilities.textDocument is not of type TextDocumentClientCapabilities")
         end

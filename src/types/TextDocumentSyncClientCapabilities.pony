@@ -1,0 +1,3 @@
+use "json"
+
+class TextDocumentSyncClientCapabilities
