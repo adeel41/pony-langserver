@@ -1,6 +1,7 @@
+use "json"
+
 class PublishDiagnosticsClientCapabilities
     let relatedInformation: (Bool | None)
-//     let tagSupport
 
-
-// class DiagnosticTagSupport
+    new create(json: JsonObject) =>
+        relatedInformation = None

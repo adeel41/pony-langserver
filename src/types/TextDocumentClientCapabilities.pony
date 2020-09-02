@@ -26,7 +26,7 @@ class TextDocumentClientCapabilities
     let semanticTokens: (SemanticTokensClientCapabilities | None)
 
     new create(json: JsonObject box) =>
-        synchronization = None
+        synchronization = try TextDocumentSyncClientCapabilities(json.data("synchronization")? as JsonObject box) else None end
         completion = None
         hover = None
         signatureHelp = None

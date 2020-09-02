@@ -111,8 +111,23 @@ class _TestInitializeParams is UnitTest
     fun capabilitiesTextDocumentAsserts(h: TestHelper, textDocument': (TextDocumentClientCapabilities | None)) =>
         match textDocument'
         | let textDocument: TextDocumentClientCapabilities =>
-            
-            h.assert_eq[I32](1, 1)
+            match textDocument.synchronization 
+            | let synchronization: TextDocumentSyncClientCapabilities =>
+                h.assert_true(try synchronization.dynamicRegistration as Bool else false end)
+                h.assert_true(try synchronization.willSave as Bool else false end)
+                h.assert_true(try synchronization.willSaveWaitUntil as Bool else false end)
+                h.assert_true(try synchronization.didSave as Bool else false end)
+            else
+                h.fail("workspace.textDocument.synchronization is not of type TextDocumentSyncClientCapabilities")
+            end
+
+            match textDocument.completion
+            | let completion: CompletionClientCapabilities =>
+                h.assert_eq[I32](1, 2)
+            else
+                h.fail("workspace.textDocument.completion is not of type CompletionClientCapabilities")
+            end
+
         else
             h.fail("capabilities.textDocument is not of type TextDocumentClientCapabilities")
         end

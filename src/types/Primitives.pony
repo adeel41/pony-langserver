@@ -68,3 +68,60 @@ type SymbolKind is ( SymbolKindFile
     | SymbolKindOperator
     | SymbolKindTypeParameter    
 )
+
+primitive MarkupKindPlainText
+primitive MarkupKindMarkdown
+type MarkupKind is ( MarkupKindPlainText | MarkupKindMarkdown)
+
+primitive CompletionItemTagDeprecated
+type CompletionItemTag is CompletionItemTagDeprecated
+
+primitive CompletionItemKindText
+primitive CompletionItemKindMethod
+primitive CompletionItemKindFunction
+primitive CompletionItemKindConstructor
+primitive CompletionItemKindField
+primitive CompletionItemKindVariable
+primitive CompletionItemKindClass
+primitive CompletionItemKindInterface
+primitive CompletionItemKindModule
+primitive CompletionItemKindProperty
+primitive CompletionItemKindUnit
+primitive CompletionItemKindValue
+primitive CompletionItemKindEnum
+primitive CompletionItemKindKeyword
+primitive CompletionItemKindSnippet
+primitive CompletionItemKindColor
+primitive CompletionItemKindFile
+primitive CompletionItemKindReference
+primitive CompletionItemKindFolder
+primitive CompletionItemKindEnumMember
+primitive CompletionItemKindConstant
+primitive CompletionItemKindStruct
+primitive CompletionItemKindOperator
+primitive CompletionItemKindTypeParameter
+type CompletionItemKind is ( CompletionItemKindText
+    | CompletionItemKindMethod
+    | CompletionItemKindFunction
+    | CompletionItemKindConstructor
+    | CompletionItemKindField
+    | CompletionItemKindVariable
+    | CompletionItemKindClass
+    | CompletionItemKindInterface
+    | CompletionItemKindModule
+    | CompletionItemKindProperty
+    | CompletionItemKindUnit
+    | CompletionItemKindValue
+    | CompletionItemKindEnum
+    | CompletionItemKindKeyword
+    | CompletionItemKindSnippet
+    | CompletionItemKindColor
+    | CompletionItemKindFile
+    | CompletionItemKindReference
+    | CompletionItemKindFolder
+    | CompletionItemKindEnumMember
+    | CompletionItemKindConstant
+    | CompletionItemKindStruct
+    | CompletionItemKindOperator
+    | CompletionItemKindTypeParameter
+)
