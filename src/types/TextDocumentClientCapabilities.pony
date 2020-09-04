@@ -27,7 +27,7 @@ class TextDocumentClientCapabilities
 
     new create(json: JsonObject box) =>
         synchronization = try TextDocumentSyncClientCapabilities(json.data("synchronization")? as JsonObject box) else None end
-        completion = None
+        completion = try CompletionClientCapabilities(json.data("completion")? as JsonObject box) else None end
         hover = None
         signatureHelp = None
         declaration = None

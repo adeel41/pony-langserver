@@ -98,6 +98,7 @@ primitive CompletionItemKindFolder
 primitive CompletionItemKindEnumMember
 primitive CompletionItemKindConstant
 primitive CompletionItemKindStruct
+primitive CompletionItemKindEvent
 primitive CompletionItemKindOperator
 primitive CompletionItemKindTypeParameter
 type CompletionItemKind is ( CompletionItemKindText
@@ -122,6 +123,7 @@ type CompletionItemKind is ( CompletionItemKindText
     | CompletionItemKindEnumMember
     | CompletionItemKindConstant
     | CompletionItemKindStruct
+    | CompletionItemKindEvent
     | CompletionItemKindOperator
     | CompletionItemKindTypeParameter
 )

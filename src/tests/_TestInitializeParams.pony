@@ -123,11 +123,44 @@ class _TestInitializeParams is UnitTest
 
             match textDocument.completion
             | let completion: CompletionClientCapabilities =>
-                h.assert_eq[I32](1, 2)
+                h.assert_true(try completion.dynamicRegistration as Bool else false end)
+                h.assert_true(try completion.contextSupport as Bool else false end)
+                match completion.completionItem
+                | let completionItem: CompletionClientCapabilitiesCompletionItem =>
+                    h.assert_true(try completionItem.snippetSupport as Bool else false end)
+                    h.assert_true(try completionItem.commitCharactersSupport as Bool else false end)
+                    match completionItem.documentationFormat
+                    | let documentationFormat: Array[MarkupKind] =>
+                        h.assert_true(try documentationFormat(0)? is MarkupKindMarkdown else false end) 
+                        h.assert_true(try documentationFormat(1)? is MarkupKindPlainText else false end)
+                    else
+                        h.fail("completionItem.documentationFormat does not contain MarkupKind")
+                    end
+                    h.assert_true(try completionItem.deprecatedSupport as Bool else false end)
+                    h.assert_true(try completionItem.preselectSupport as Bool else false end)
+                    match completionItem.tagSupport
+                    | let tagSupport: CompletionItemTagSupport =>
+                        h.assert_true(try tagSupport.valueSet(0)? is CompletionItemTagDeprecated else false end)
+                    else
+                        h.fail("completionItem.tagSupport is not of type CompletionItemTagSupport")
+                    end
+                else
+                    h.fail("completion.completionItem is not of type CompletionClientCapabilitiesCompletionItem")
+                end
+                match completion.completionItemKind
+                | let completionItemKind: CompletionClientCapabilitiesCompletionItemKind =>
+                    match completionItemKind.valueSet
+                    | let valueSet: Array[CompletionItemKind] =>
+                        h.assert_eq[I32](25, valueSet.size().i32())
+                    else
+                        h.fail("completionItemKind.valueSet is not of type Array[CompletionItemKind]")
+                    end
+                else
+                    h.fail("completion.completionItemKind is not of type CompletionClientCapabilitiesCompletionItemKind")
+                end
             else
-                h.fail("workspace.textDocument.completion is not of type CompletionClientCapabilities")
+                h.fail("textDocument.completion is not of type CompletionClientCapabilities")
             end
-
         else
             h.fail("capabilities.textDocument is not of type TextDocumentClientCapabilities")
         end
