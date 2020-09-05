@@ -13,4 +13,15 @@ actor Main is TestList
         test(_TestEnvelopeOpen)
         test(_TestRequestMessageCreate)
         test(_TestRequestMessageGetParams)
+
         test(_TestInitializeParams)
+        test(_TestClientInfo)
+
+        test(_TestClientCapabilities)
+
+        test(_TestWorkspace)
+        test(_TestWorkspaceEditClientCapabilities)
+
+        test(_TestTextDocumentClientCapabilities)
+        test(_TestTextDocumentSyncClientCapabilities)
+

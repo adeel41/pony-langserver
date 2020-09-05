@@ -16,7 +16,7 @@ class _TestInitializeParams is UnitTest
         var params : (InitializeParams | None) = None
         try        
            let request_message = RequestMessage(json.data as JsonObject)?
-           params = request_message.get_params()?
+           params = request_message.get_params()
         else
             h.fail("Error when called get_params() on request_message")
         end
@@ -26,100 +26,26 @@ class _TestInitializeParams is UnitTest
 
             h.assert_false(p.processId is None, "ProcessId is None") 
             h.assert_eq[I64](19480, try p.processId as I64 else 0 end, "No ProcessId found")
-
             h.assert_false(p.clientInfo is None, "ClientInfo is None")
-            clientInfoAsserts(h, p.clientInfo)
-            capabilitiesWorkspaceAsserts(h, p.capabilities)
+
             capabilitiesTextDocumentAsserts(h, p.capabilities.textDocument)
 
         else
             h.fail("Should have received an InitializedParams type")
         end
 
-    fun clientInfoAsserts(h:TestHelper, clientInfo': (ClientInfo|None) ) =>
-        match clientInfo'
-        | let clientInfo: ClientInfo =>
-            h.assert_eq[String]("vscode", clientInfo.name)
-            h.assert_false(clientInfo.version is None, "clientInfo.version is None")
-            h.assert_eq[String]("1.47.3", try clientInfo.version as String else "" end)
-        else
-            h.fail("p.clientInfo is not of type ClientInfo")
-        end
-
-    fun capabilitiesWorkspaceAsserts(h:TestHelper, capabilities:ClientCapabilities) =>
-        match capabilities.workspace
-        | let workspace: Workspace =>
-                h.assert_true(try workspace.applyEdit as Bool else false end)
-                workspaceEditAsserts(h, workspace.workspaceEdit)
-
-                match workspace.didChangeConfiguration
-                | let didChangeConfiguration: DidChangeConfigurationClientCapabilities =>
-                    h.assert_true(try didChangeConfiguration.dynamicRegistration as Bool else false end)
-                else
-                    h.fail("workspace.didChangeConfiguration is not of type DidChangeConfigurationClientCapabilities")
-                end
-
-                match workspace.didChangeWatchedFiles
-                | let didChangeWatchedFiles: DidChangeWatchedFilesClientCapabilities =>
-                    h.assert_true(try didChangeWatchedFiles.dynamicRegistration as Bool else false end)
-                else
-                    h.fail("workspace.didChangeWatchedFiles is not of type DidChangeWatchedFilesClientCapabilities")
-                end
-
-                match workspace.symbol
-                | let symbol: WorkspaceSymbolClientCapabilities =>
-                    h.assert_true(try symbol.dynamicRegistration as Bool else false end )
-                    h.assert_eq[I32](26, try ((symbol.symbolKind as SymbolKinds).valueSet as Array[SymbolKind]).size().i32() else 0 end)
-                else
-                    h.fail("workspace.symbol is not of type WorkspaceSymbolClientCapabilities")
-                end
-
-                match workspace.executeCommand
-                | let executeCommand: ExecuteCommandClientCapabilities =>
-                    h.assert_true(try executeCommand.dynamicRegistration as Bool else false end)
-                else
-                    h.fail("workspace.executeCommand is not of type ExecuteCommandClientCapabilities")
-                end
-
-                h.assert_true(try workspace.configuration as Bool else false end)
-                h.assert_true(try workspace.workspaceFolders as Bool else false end)
-
-        else
-            h.fail("capabilities.workspace is not of type Workspace")
-        end
-
-    fun workspaceEditAsserts(h: TestHelper, workspaceEdit': (WorkspaceEditClientCapabilities|None)) =>
-        match workspaceEdit'
-        | let workspaceEdit: WorkspaceEditClientCapabilities =>
-            h.assert_true(try workspaceEdit.documentChanges as Bool else false end)
-            let resourceOperationsExpected:Array[ResourceOperationKind] = [ResourceOperationKindCreate;ResourceOperationKindRename;ResourceOperationKindDelete]
-            let emptyResourceOperations: Array[ResourceOperationKind] = []
-
-            match workspaceEdit.resourceOperations
-            | let resourceOperations: Array[ResourceOperationKind] =>
-                h.assert_true( try resourceOperations(0)? is ResourceOperationKindCreate else false end )
-                h.assert_true( try resourceOperations(1)? is ResourceOperationKindRename else false end )
-                h.assert_true( try resourceOperations(2)? is ResourceOperationKindDelete else false end )
-            else
-                h.fail("workspaceEdit.resourceOperations does not contain ResourceOperationKind")
-            end                
-            h.assert_true(workspaceEdit.failureHandling is FailureHandlingKindTextOnlyTransactional)
-        else
-            h.fail("workspace.workspaceEdit is not of type WorkspaceEditClientCapabilities")
-        end
-
     fun capabilitiesTextDocumentAsserts(h: TestHelper, textDocument': (TextDocumentClientCapabilities | None)) =>
         match textDocument'
         | let textDocument: TextDocumentClientCapabilities =>
-            match textDocument.synchronization 
-            | let synchronization: TextDocumentSyncClientCapabilities =>
-                h.assert_true(try synchronization.dynamicRegistration as Bool else false end)
-                h.assert_true(try synchronization.willSave as Bool else false end)
-                h.assert_true(try synchronization.willSaveWaitUntil as Bool else false end)
-                h.assert_true(try synchronization.didSave as Bool else false end)
-            else
-                h.fail("workspace.textDocument.synchronization is not of type TextDocumentSyncClientCapabilities")
-            end
+            // match textDocument.synchronization 
+            // | let synchronization: TextDocumentSyncClientCapabilities =>
+            //     h.assert_true(try synchronization.dynamicRegistration as Bool else false end)
+            //     h.assert_true(try synchronization.willSave as Bool else false end)
+            //     h.assert_true(try synchronization.willSaveWaitUntil as Bool else false end)
+            //     h.assert_true(try synchronization.didSave as Bool else false end)
+            // else
+            //     h.fail("workspace.textDocument.synchronization is not of type TextDocumentSyncClientCapabilities")
+            // end
 
             match textDocument.completion
             | let completion: CompletionClientCapabilities =>

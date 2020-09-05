@@ -31,7 +31,7 @@ class _TestRequestMessageGetParams is UnitTest
         var params : (InitializeParams | None) = None
         try        
            let request_message = RequestMessage(json.data as JsonObject)?
-           params = request_message.get_params()?
+           params = request_message.get_params()
         else
             h.fail("Error when called get_params() on request_message")
         end
