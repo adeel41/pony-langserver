@@ -9,7 +9,7 @@ class ClientCapabilities
     new create(json: JsonObject box) =>
         workspace = try Workspace(json.data("workspace")? as JsonObject box) else None end
         textDocument = try TextDocumentClientCapabilities(json.data("textDocument")? as JsonObject box) else None end
-        window =  None
+        window =  try WindowClientCapabilities(json.data("window")? as JsonObject box) else None end
         experimental = None
 
     new empty() =>
