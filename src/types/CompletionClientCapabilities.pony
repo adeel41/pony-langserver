@@ -27,20 +27,7 @@ class CompletionClientCapabilitiesCompletionItem
     new create(json: JsonObject box) =>
         snippetSupport = try json.data("snippetSupport")? as Bool else None end
         commitCharactersSupport = try json.data("commitCharactersSupport")? as Bool else None end        
-        documentationFormat = 
-            try 
-                let result = Array[MarkupKind](2)
-                let arr = json.data("documentationFormat")? as JsonArray box
-                for value in arr.data.values() do
-                    match value
-                    | "markdown" => result.push(MarkupKindMarkdown)
-                    | "plaintext" => result.push(MarkupKindPlainText)
-                    end
-                end
-                result
-            else
-                None
-            end
+        documentationFormat = DocumentationFormatFactory(json)
         deprecatedSupport = try json.data("deprecatedSupport")? as Bool else None end
         preselectSupport = try json.data("preselectSupport")? as Bool else None end
         tagSupport = try CompletionItemTagSupport(json.data("tagSupport")? as JsonObject box) else None end

@@ -24,5 +24,8 @@ actor Main is TestList
         test(_TestTextDocumentSyncClientCapabilities)
         test(_TestWorkspace)
         test(_TestWorkspaceEditClientCapabilities)
+        test(_TestSignatureHelpClientCapabilities)
+        test(_TestDefinitionClientCapabilities)
+        test(_TestReferenceClientCapabilities)
 
 

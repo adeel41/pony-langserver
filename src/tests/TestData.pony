@@ -57,3 +57,19 @@ primitive TestData
         try
             (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).hover
         end        
+
+    fun getSignatureHelpClientCapabilities() : (SignatureHelpClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).signatureHelp
+        end
+
+    fun getDefinitionClientCapabilities() : (DefinitionClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).definition
+        end
+
+    fun getReferenceClientCapabilities() : (ReferenceClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).references
+        end
+

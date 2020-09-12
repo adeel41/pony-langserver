@@ -29,12 +29,12 @@ class TextDocumentClientCapabilities
         synchronization = try TextDocumentSyncClientCapabilities(json.data("synchronization")? as JsonObject box) else None end
         completion = try CompletionClientCapabilities(json.data("completion")? as JsonObject box) else None end
         hover = try HoverClientCapabilities(json.data("hover")? as JsonObject box) else None end
-        signatureHelp = None
+        signatureHelp = try SignatureHelpClientCapabilities(json.data("signatureHelp")? as JsonObject box) else None end
         declaration = None
-        definition = None
+        definition = try DefinitionClientCapabilities(json.data("declaration")? as JsonObject box) else None end
         typeDefinition = None
         implementation = None
-        references = None
+        references = try ReferenceClientCapabilities(json.data("references")? as JsonObject box) else None end
         documentHighlight = None
         documentSymbol = None
         codeAction = None

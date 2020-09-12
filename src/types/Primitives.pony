@@ -1,3 +1,5 @@
+use "json"
+
 primitive TracingOff
 primitive TracingMessages
 primitive TracingVerbose
@@ -72,6 +74,21 @@ type SymbolKind is ( SymbolKindFile
 primitive MarkupKindPlainText
 primitive MarkupKindMarkdown
 type MarkupKind is ( MarkupKindPlainText | MarkupKindMarkdown)
+primitive DocumentationFormatFactory
+    fun apply(json: JsonObject box) : (Array[MarkupKind] | None) =>
+        try 
+            let result = Array[MarkupKind](2)
+            let arr = json.data("documentationFormat")? as JsonArray box
+            for value in arr.data.values() do
+                match value
+                | "markdown" => result.push(MarkupKindMarkdown)
+                | "plaintext" => result.push(MarkupKindPlainText)
+                end
+            end
+            result
+        else
+            None
+        end    
 
 primitive CompletionItemTagDeprecated
 type CompletionItemTag is CompletionItemTagDeprecated
