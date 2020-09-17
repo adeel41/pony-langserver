@@ -73,3 +73,13 @@ primitive TestData
             (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).references
         end
 
+    fun getDocumentHighlightClientCapabilities() : (DocumentHighlightClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).documentHighlight
+        end
+
+    fun getCodeLensClientCapabilities() : (CodeLensClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).codeLens
+        end
+    

@@ -27,5 +27,5 @@ actor Main is TestList
         test(_TestSignatureHelpClientCapabilities)
         test(_TestDefinitionClientCapabilities)
         test(_TestReferenceClientCapabilities)
-
-
+        test(_TestDocumentHighlightClientCapabilities)
+        test(_TestCodeLensClientCapabilities)
