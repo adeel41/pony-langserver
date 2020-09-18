@@ -82,4 +82,28 @@ primitive TestData
         try
             (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).codeLens
         end
+
+    fun getSemanticTokensClientCapabilities() : (SemanticTokensClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).semanticTokens
+        end
     
+    fun getSelectionRangeClientCapabilities() : (SelectionRangeClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).selectionRange
+        end
+
+    fun getFoldingRangeClientCapabilities() : (FoldingRangeClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).foldingRange
+        end
+
+    fun getPublishDiagnosticsClientCapabilities() : (PublishDiagnosticsClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).publishDiagnostics
+        end
+
+    fun getRenameClientCapabilities() : (RenameClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).rename
+        end

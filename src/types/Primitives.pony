@@ -144,3 +144,10 @@ type CompletionItemKind is ( CompletionItemKindText
     | CompletionItemKindOperator
     | CompletionItemKindTypeParameter
 )
+
+primitive TokenFormatRelative
+type TokenFormat is (TokenFormatRelative)
+
+primitive DiagnosticTagUnnecessary
+primitive DiagnosticTagDeprecated
+type DiagnosticTag is (DiagnosticTagUnnecessary | DiagnosticTagDeprecated)
