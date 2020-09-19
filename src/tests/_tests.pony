@@ -30,6 +30,12 @@ actor Main is TestList
         test(_TestDocumentHighlightClientCapabilities)
         test(_TestCodeLensClientCapabilities)
 
+        test(_TestCodeActionClientCapabilities)
+        test(_TestDocumentLinkClientCapabilities)
+        test(_TestDocumentColorClientCapabilities)
+        test(_TestDocumentFormattingClientCapabilities)
+        test(_TestDocumentRangeFormattingClientCapabilities)
+        test(_TestDocumentOnTypeFormattingClientCapabilities)
         test(_TestRenameClientCapabilities)
         test(_TestPublishDiagnosticsClientCapabilities)
         test(_TestFoldingRangeClientCapabilities)

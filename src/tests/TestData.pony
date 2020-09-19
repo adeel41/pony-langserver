@@ -107,3 +107,34 @@ primitive TestData
         try
             (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).rename
         end
+
+    fun getDocumentOnTypeFormattingClientCapabilities() : (DocumentOnTypeFormattingClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).onTypeFormatting
+        end
+
+    fun getDocumentRangeFormattingClientCapabilities() : (DocumentRangeFormattingClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).rangeFormatting
+        end
+
+    fun getDocumentFormattingClientCapabilities() : (DocumentFormattingClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).formatting
+        end
+
+    fun getDocumentColorClientCapabilities() : (DocumentColorClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).colorProvider
+        end
+
+    fun getDocumentLinkClientCapabilities() : (DocumentLinkClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).documentLink
+        end
+
+    fun getCodeActionClientCapabilities() : (CodeActionClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).codeAction
+        end
+
