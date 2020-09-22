@@ -26,7 +26,7 @@ class iso _TestWorkspace is UnitTest
                 match workspace.symbol
                 | let symbol: WorkspaceSymbolClientCapabilities =>
                     h.assert_true(try symbol.dynamicRegistration as Bool else false end )
-                    h.assert_eq[I32](26, try ((symbol.symbolKind as SymbolKinds).valueSet as Array[SymbolKind]).size().i32() else 0 end)
+                    h.assert_eq[I32](26, try ((symbol.symbolKind as SymbolKindValueSet).valueSet as Array[SymbolKind]).size().i32() else 0 end)
                 else
                     h.fail("symbol is not of type WorkspaceSymbolClientCapabilities")
                 end

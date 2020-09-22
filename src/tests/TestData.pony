@@ -138,3 +138,22 @@ primitive TestData
             (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).codeAction
         end
 
+    fun getDocumentSymbolClientCapabilities() : (DocumentSymbolClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).documentSymbol
+        end
+
+    fun getImplementationClientCapabilities() : (ImplementationClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).implementation
+        end
+
+    fun getTypeDefinitionClientCapabilities() : (TypeDefinitionClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).typeDefinition
+        end
+        
+    fun getDeclarationClientCapabilities() : (DeclarationClientCapabilities | None) =>
+        try
+            (TestData.getTextDocumentClientCapabilities() as TextDocumentClientCapabilities).declaration
+        end

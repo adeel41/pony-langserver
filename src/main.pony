@@ -17,5 +17,5 @@ actor Main
         end
         
 actor RequestMessageHandler
-    be handle(requestMessage: RequestMessage, env: Env) =>
+    be handle(requestMessage: RequestMessage val, env: Env) =>
         env.out.print("I am handling this")

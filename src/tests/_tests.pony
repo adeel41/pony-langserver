@@ -26,11 +26,16 @@ actor Main is TestList
         test(_TestWorkspaceEditClientCapabilities)
         test(_TestSignatureHelpClientCapabilities)
         test(_TestDefinitionClientCapabilities)
+
+        test(_TestDeclarationClientCapabilities)
+        test(_TestTypeDefinitionClientCapabilities)
+        test(_TestImplementationClientCapabilities)
         test(_TestReferenceClientCapabilities)
         test(_TestDocumentHighlightClientCapabilities)
-        test(_TestCodeLensClientCapabilities)
 
+        test(_TestDocumentSymbolClientCapabilities)
         test(_TestCodeActionClientCapabilities)
+        test(_TestCodeLensClientCapabilities)
         test(_TestDocumentLinkClientCapabilities)
         test(_TestDocumentColorClientCapabilities)
         test(_TestDocumentFormattingClientCapabilities)

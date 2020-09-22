@@ -90,6 +90,7 @@ primitive DocumentationFormatFactory
             None
         end    
 
+//Are they are considered same as SymbolTag
 primitive CompletionItemTagDeprecated
 type CompletionItemTag is CompletionItemTagDeprecated
 
@@ -169,3 +170,6 @@ type CodeActionKind is ( CodeActionKindEmpty
     | CodeActionKindSource
     | CodeActionKindSourceOrganizeImports    
 )
+
+primitive SymbolTagDeprecated
+type SymbolTag is SymbolTagDeprecated
