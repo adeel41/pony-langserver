@@ -51,22 +51,3 @@ class ServerCapabilities
         workspaceSymbolProvider = None
         workspace = None
         experimental = None
-
-
-class ReferenceOptions
-class DocumentHighlightOptions
-class DocumentSymbolOptions
-class CodeActionOptions
-class CodeLensOptions
-class DocumentLinkOptions
-class DocumentColorOptions
-class DocumentColorRegistrationOptions
-class DocumentFormattingOptions
-class DocumentRangeFormattingOptions
-class DocumentOnTypeFormattingOptions
-class RenameOptions
-class FoldingRangeOptions
-class FoldingRangeRegistrationOptions
-class ExecuteCommandOptions
-class SelectionRangeOptions
-class SelectionRangeRegistrationOptions
