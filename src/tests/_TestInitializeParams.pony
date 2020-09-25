@@ -1,6 +1,6 @@
 use "ponytest"
 use "json"
-use "../types"
+use "../types/client"
 use "Debug"
 
 class _TestInitializeParams is UnitTest

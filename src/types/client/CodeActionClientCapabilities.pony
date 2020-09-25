@@ -1,5 +1,5 @@
 use "json"
-use "common"
+use "../common"
 
 class CodeActionClientCapabilities
     let dynamicRegistration: (Bool | None)
