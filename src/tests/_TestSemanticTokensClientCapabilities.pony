@@ -1,5 +1,5 @@
 use "ponytest"
-use "../types/client"
+use "../types"
 
 class iso _TestSemanticTokensClientCapabilities is UnitTest
     fun name() : String => "SemanticTokensClientCapabilities"

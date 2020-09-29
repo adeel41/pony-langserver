@@ -1,5 +1,5 @@
 use "ponytest"
-use "../types/client"
+use "../types"
 
 class iso _TestTypeDefinitionClientCapabilities is UnitTest
     fun name() : String => "TypeDefinitionClientCapabilities"

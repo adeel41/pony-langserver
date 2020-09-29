@@ -1,4 +1,4 @@
-use "../types/client"
+use "../types"
 use "json"
 
 primitive TestData

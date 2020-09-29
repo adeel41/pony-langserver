@@ -1,6 +1,6 @@
 use "ponytest"
 use "json"
-use "../types/client"
+use "../types"
 
 class _TestRequestMessageGetParams is UnitTest
     let _msg: String = """

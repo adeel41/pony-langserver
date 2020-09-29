@@ -1,5 +1,5 @@
 use "ponytest"
-use "../types/client"
+use "../types"
 use "json"
 use "Debug"
 

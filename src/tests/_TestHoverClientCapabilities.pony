@@ -1,5 +1,5 @@
 use "ponytest"
-use "../types/client"
+use "../types"
 
 class iso _TestHoverClientCapabilities is UnitTest
     fun name() : String => "HoverClientCapabilities"

@@ -5,4 +5,6 @@ class DeclarationRegistrationOptions
 
     new create() =>
         workDoneProgress = None
+        id = None
+        documentSelector = None
 

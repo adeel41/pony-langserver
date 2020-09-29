@@ -1,4 +1,4 @@
-class Workspace
+class ServerWorkspace
     let workspaceFolders: (WorkspaceFoldersServerCapabilities | None)
     
     new create(workspaceFolders': WorkspaceFoldersServerCapabilities) =>

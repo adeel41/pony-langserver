@@ -1,5 +1,5 @@
 use "ponytest"
-use "../types/client"
+use "../types"
 
 class iso _TestEnvelopeOpen is UnitTest
     let _msg:String = """

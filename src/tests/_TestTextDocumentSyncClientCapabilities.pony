@@ -1,4 +1,4 @@
-use "../types/client"
+use "../types"
 use "ponytest"
 
 class iso _TestTextDocumentSyncClientCapabilities is UnitTest

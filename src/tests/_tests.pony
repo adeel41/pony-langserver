@@ -1,5 +1,5 @@
 use "ponytest"
-use "../types/client"
+use "../types"
 
 actor Main is TestList
     new create(env: Env) =>

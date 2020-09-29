@@ -156,3 +156,24 @@ type DiagnosticTag is (DiagnosticTagUnnecessary | DiagnosticTagDeprecated)
 
 primitive SymbolTagDeprecated
 type SymbolTag is SymbolTagDeprecated
+
+primitive ErrorCodes
+    fun parseError() : U32 => -32700
+    fun invalidRequest() : U32 => -32600
+    fun methodNotFound() : U32 => -32601
+    fun invalidParams() : U32 => -32602
+    fun internalError() : U32 => -32603
+    fun serverErrorStart() : U32 => -32099
+    fun serverErrorEnd() : U32 => -32000
+    fun serverNotInitialized() : U32 => -32002
+    fun unknownErrorCode() : U32 => -32001
+    fun requestCancelled() : U32 => -32800
+    fun contentModified() : U32 => -32801
+
+primitive TextDocumentSyncKindNone
+primitive TextDocumentSyncKindFull
+primitive TextDocumentSyncKindIncremental
+type TextDocumentSyncKind is ( TextDocumentSyncKindNone
+    | TextDocumentSyncKindFull
+    | TextDocumentSyncKindIncremental
+)
