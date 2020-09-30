@@ -1,4 +1,4 @@
-use "../types"
+use "../../types"
 
 class MessageHandlerFactory
     

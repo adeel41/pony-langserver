@@ -1,6 +1,6 @@
 class ResponseMessage
     let id: (I64 | String | None)
-    let result: (I64 | String | Bool | None) //also supports object
+    let result: (I64 | String | Bool | InitializeResult | None) //also supports object
     let error': (ResponseError | None) 
 
     new create(id': (I64 | String), result': (I64 | String | Bool) ) =>
