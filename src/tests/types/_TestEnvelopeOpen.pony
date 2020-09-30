@@ -8,7 +8,7 @@ Content-Length: 58
 
 {"jsonrpc":"2.0","id":1,"method":"shutdown","params":null}"""
 
-    fun name(): String => "Envelope:Open"
+    fun name(): String => "types:Envelope:Open"
     fun apply(h: TestHelper) =>
         let envelope = Envelope(_msg.array())
         try

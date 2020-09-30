@@ -1,6 +1,4 @@
 use "ponytest"
-use types = "types"
-use handlers = "handlers"
 
 actor Main is TestList
     new create(env: Env) =>
@@ -10,5 +8,4 @@ actor Main is TestList
         None
 
     fun tag tests(test: PonyTest) =>
-        types.Main.make().tests(test)
-        handlers.Main.make().tests(test)
+        test(_MessageHandlerFactoryTests)

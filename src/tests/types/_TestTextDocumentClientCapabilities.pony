@@ -2,7 +2,7 @@ use "../../types"
 use "ponytest"
 
 class iso _TestTextDocumentClientCapabilities is UnitTest
-    fun name() : String => "TextDocumentClientCapabilities"
+    fun name() : String => "types:TextDocumentClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getTextDocumentClientCapabilities()
         match data'

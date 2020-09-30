@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestCodeLensClientCapabilities is UnitTest
-    fun name(): String => "CodeLensClientCapabilities"
+    fun name(): String => "types:CodeLensClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getCodeLensClientCapabilities()
         match data'

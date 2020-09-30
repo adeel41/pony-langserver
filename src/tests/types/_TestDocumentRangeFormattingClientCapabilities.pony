@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestDocumentRangeFormattingClientCapabilities is UnitTest
-    fun name() : String => "DocumentRangeFormattingClientCapabilities"
+    fun name() : String => "types:DocumentRangeFormattingClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getDocumentRangeFormattingClientCapabilities()
         match data'

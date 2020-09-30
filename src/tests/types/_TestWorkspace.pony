@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestWorkspace is UnitTest
-    fun name() : String => "Workspace"
+    fun name() : String => "types:Workspace"
     fun apply(h: TestHelper) =>
         let data' = TestData.getWorkspace()
         match data'

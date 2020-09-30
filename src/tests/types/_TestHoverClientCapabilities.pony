@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestHoverClientCapabilities is UnitTest
-    fun name() : String => "HoverClientCapabilities"
+    fun name() : String => "types:HoverClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getHoverClientCapabilities()
         match data'

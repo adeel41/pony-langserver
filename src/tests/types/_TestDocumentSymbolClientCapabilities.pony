@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestDocumentSymbolClientCapabilities is UnitTest
-    fun name() : String => "DocumentSymbolClientCapabilities"
+    fun name() : String => "types:DocumentSymbolClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getDocumentSymbolClientCapabilities()
         match data'

@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestCompletionClientCapabilitiesCompletionItem is UnitTest
-    fun name() : String => "CompletionClientCapabilitiesCompletionItem"
+    fun name() : String => "types:CompletionClientCapabilitiesCompletionItem"
     fun apply(h: TestHelper) =>
         let data' = TestData.getCompletionClientCapabilitiesCompletionItem()
         match data'

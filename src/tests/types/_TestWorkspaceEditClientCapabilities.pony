@@ -3,7 +3,7 @@ use "../../types"
 
 class iso _TestWorkspaceEditClientCapabilities is UnitTest
 
-    fun name(): String => "WorkspaceEditClientCapabilities"
+    fun name(): String => "types:WorkspaceEditClientCapabilities"
     fun apply(h: TestHelper) =>
         let data': (WorkspaceEditClientCapabilities | None) = TestData.getWorkspaceEditClientCapabilities()
         match data'

@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestDocumentHighlightClientCapabilities is UnitTest
-    fun name() : String => "DocumentHighlightClientCapabilities"
+    fun name() : String => "types:DocumentHighlightClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getDocumentHighlightClientCapabilities()
         match data'

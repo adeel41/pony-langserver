@@ -2,7 +2,7 @@ use "ponytest"
 use "../../types"
 
 class iso _TestFoldingRangeClientCapabilities  is UnitTest
-    fun name() : String => "FoldingRangeClientCapabilities"
+    fun name() : String => "types:FoldingRangeClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getFoldingRangeClientCapabilities()
         match data'
