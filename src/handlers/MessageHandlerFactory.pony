@@ -1,6 +1,14 @@
-use "../../types"
+use "../types"
 
-class MessageHandlerFactory
+primitive MessageHandlerFactory    
+    fun handle(message: RequestMessage) : ResponseMessage =>
+        match message.get_params()
+        | let params : InitializeParams =>
+            InitializeHandler.handle(params)
+        else
+            ResponseMessage(1, false)
+        end
     
-    new create(requestMessage: RequestMessage) =>
-        None
+primitive InitializeHandler
+    fun handle(params: InitializeParams) : ResponseMessage =>
+        ResponseMessage(2, false)

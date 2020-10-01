@@ -1,6 +1,7 @@
 use "net"
 use "Debug"
 use "package:types"
+use handlers = "package:handlers"
 
 class LanguageServerTCPConnectionNotify is TCPConnectionNotify
     fun ref accepted(conn: TCPConnection ref) =>
@@ -22,8 +23,25 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
     fun ref received(conn: TCPConnection ref, data: Array[U8] iso, times: USize) : Bool =>
         let envelope = Envelope(consume data)
         Debug(envelope.content)
-        //conn.close()
+        
+        var message: (RequestMessage | None) = None
+        try 
+            message = envelope.open()?
+        else
+            let response = ResponseMessage.failed(1, ResponseError(ErrorCodes.parseError(), "parse error"))
+            // send this response.
+            false
+        end
+
+        match message
+        | let rm: RequestMessage =>
+            let response = handlers.MessageHandlerFactory.handle(rm)
+            // send this response.
+
+        end
+        
         true
+        //conn.close()
 
     fun ref connect_failed(conn: TCPConnection ref) =>
         Debug("PLS: Connection Failed")
