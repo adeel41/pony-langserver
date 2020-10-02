@@ -8,7 +8,3 @@ primitive MessageHandlerFactory
         else
             ResponseMessage(1, false)
         end
-    
-primitive InitializeHandler
-    fun handle(params: InitializeParams) : ResponseMessage =>
-        ResponseMessage(2, false)

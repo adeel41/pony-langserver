@@ -8,4 +8,4 @@ actor Main is TestList
         None
 
     fun tag tests(test: PonyTest) =>
-        test(_MessageHandlerFactoryTests)
+        test(_MessageHandlerFactoryInitializeTest)
