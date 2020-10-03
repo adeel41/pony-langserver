@@ -6,5 +6,5 @@ primitive MessageHandlerFactory
         | let params : InitializeParams =>
             InitializeHandler.handle(params)
         else
-            ResponseMessage(1, false)
+            ResponseMessage.failed(3, ResponseError(123, "Message not supported on Server"))
         end

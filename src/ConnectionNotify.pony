@@ -1,5 +1,6 @@
 use "net"
 use "Debug"
+use "json"
 use "package:types"
 use handlers = "package:handlers"
 
@@ -24,24 +25,32 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
         let envelope = Envelope(consume data)
         Debug(envelope.content)
         
+        let response_message: ResponseMessage = get_response_message(envelope)
+        let jsonDoc = JsonDoc
+        jsonDoc.data = response_message.to_json()
+        let response = jsonDoc.string()
+        Debug("Response: " + response)
+        conn.write(response)        
+        true
+        //conn.close()
+
+    fun get_response_message(envelope: Envelope) : ResponseMessage =>
         var message: (RequestMessage | None) = None
         try 
             message = envelope.open()?
         else
-            let response = ResponseMessage.failed(1, ResponseError(ErrorCodes.parseError(), "parse error"))
-            // send this response.
-            false
+            return ResponseMessage.failed(1, ResponseError(ErrorCodes.parseError(), "parse error"))            
         end
 
         match message
         | let rm: RequestMessage =>
             let response = handlers.MessageHandlerFactory.handle(rm)
-            // send this response.
-
+            return response
+        else
+            ResponseMessage.failed(2, ResponseError(ErrorCodes.internalError(), "Internal Error. Couldn't handle message request"))
         end
         
-        true
-        //conn.close()
+
 
     fun ref connect_failed(conn: TCPConnection ref) =>
         Debug("PLS: Connection Failed")
