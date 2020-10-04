@@ -7,4 +7,4 @@ primitive InitializeHandler
         let capabilities = ServerCapabilities(textDocumentSync)
         let serverInfo = ServerInfo("Neigh - Pony Language Server", "0.0.1")
         let result = InitializeResult(capabilities, serverInfo)
-        ResponseMessage(2, result)
+        ResponseMessage(1, result)

@@ -10,4 +10,6 @@ class InitializeResult
 
     fun to_json() : JsonObject =>
         let json = JsonObject
+        json.data("capabilities") = capabilities.to_json()
+        try json.data("serverInfo") = (serverInfo as ServerInfo box).to_json() end
         json

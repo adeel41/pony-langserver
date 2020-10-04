@@ -22,15 +22,23 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
         //conn.write("hello world")
 
     fun ref received(conn: TCPConnection ref, data: Array[U8] iso, times: USize) : Bool =>
-        let envelope = Envelope(consume data)
-        Debug(envelope.content)
+        let str = String.from_array(consume data)
+        let envelope = Envelope(str)
+        Debug("Request: " + str)
+        try 
+            if str.array()(0)? == 'C' then
+                return true
+            end
+        end
         
         let response_message: ResponseMessage = get_response_message(envelope)
-        let jsonDoc = JsonDoc
-        jsonDoc.data = response_message.to_json()
-        let response = jsonDoc.string()
-        Debug("Response: " + response)
-        conn.write(response)        
+        let sendEnvelope = Envelope.from_json(response_message.to_json())
+        let response = sendEnvelope.stringify()
+        Debug("Response: " + response + "\r\n\r\n")
+        conn.write("Content-Length: " + sendEnvelope.length.string() + "\r\n\r\n")
+        conn.write(sendEnvelope.content)
+        // "Content-Length: " + (length.string()) + "\r\n\r\n" + content
+        // conn.write(response)        
         true
         //conn.close()
 

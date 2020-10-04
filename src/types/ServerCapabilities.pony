@@ -1,3 +1,5 @@
+use "json"
+
 class ServerCapabilities
     let textDocumentSync: (TextDocumentSyncOptions | I64)
     """ 
@@ -130,3 +132,11 @@ class ServerCapabilities
         workspaceSymbolProvider = None
         workspace = None
         experimental = None
+
+    fun to_json() : JsonObject =>
+        let json = JsonObject
+        try 
+            json.data("textDocumentSync") = (textDocumentSync as TextDocumentSyncOptions box).to_json()
+        end
+
+        json

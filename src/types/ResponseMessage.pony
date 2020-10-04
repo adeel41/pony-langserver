@@ -17,6 +17,7 @@ class ResponseMessage
 
     fun to_json() : JsonObject =>
         let json = JsonObject
+        json.data("jsonrpc") = "2.0"
         json.data("id") = id        
 
         match responseError

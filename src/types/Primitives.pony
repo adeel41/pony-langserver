@@ -171,8 +171,12 @@ primitive ErrorCodes
     fun contentModified() : U32 => -32801
 
 primitive TextDocumentSyncKindNone
+    fun get_id() : I64 => 0
 primitive TextDocumentSyncKindFull
+    fun get_id() : I64 => 1
 primitive TextDocumentSyncKindIncremental
+    fun get_id() : I64 => 2
+
 type TextDocumentSyncKind is ( TextDocumentSyncKindNone
     | TextDocumentSyncKindFull
     | TextDocumentSyncKindIncremental
