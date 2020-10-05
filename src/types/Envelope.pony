@@ -5,6 +5,7 @@ class Envelope
     let length: U16
     let content: String
     
+    //should be changed to accept length and content directly
     new create(str:String) =>
         // let str = String.from_array(data)
         let splits:Array[String] = str.split("\r\n")

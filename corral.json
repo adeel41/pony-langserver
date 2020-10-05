@@ -2,6 +2,9 @@
   "deps": [
     {
       "locator": "github.com/ponylang/http_server.git"
+    },
+    {
+      "locator": "github.com/ponylang/valbytes.git"
     }
   ],
   "info": {}

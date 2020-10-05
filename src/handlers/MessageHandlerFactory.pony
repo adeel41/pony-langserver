@@ -4,7 +4,7 @@ primitive MessageHandlerFactory
     fun handle(message: RequestMessage) : ResponseMessage =>
         match message.get_params()
         | let params : InitializeParams =>
-            InitializeHandler.handle(params)
+            InitializeHandler.handle(params, message.id)
         else
-            ResponseMessage.failed(3, ResponseError(123, "Message not supported on Server"))
+            ResponseMessage.failed(message.id, ResponseError(123, "Message not supported on Server"))
         end
