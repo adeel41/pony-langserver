@@ -8,3 +8,8 @@ primitive MessageHandlerFactory
         else
             ResponseMessage.failed(message.id, ResponseError(123, "Message not supported on Server"))
         end
+
+
+primitive NotificationHandlerFactory
+    fun handle(message: Notification) =>
+        None
