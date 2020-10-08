@@ -15,7 +15,3 @@ actor Main
         else
             env.out.print("No listener")
         end
-        
-actor RequestMessageHandler
-    be handle(requestMessage: RequestMessage val, env: Env) =>
-        env.out.print("I am handling this")
