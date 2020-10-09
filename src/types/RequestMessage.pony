@@ -16,3 +16,37 @@ class RequestMessage
         else
             None
         end
+
+class DidOpenTextDocumentParams
+    let textDocument: TextDocumentItem
+
+    new create(json: JsonObject) =>
+        textDocument = TextDocumentItem(json)
+
+class TextDocumentItem
+    let uri: String
+    """
+    The text document's URI.
+    """
+
+    let languageId: String
+    """
+    The text document's language identifier.
+    """
+
+    let version: I64
+    """
+    The version number of this document (it will increase after each
+	change, including undo/redo).
+    """
+
+    let text: String
+    """
+    The content of the opened text document.
+    """
+
+    new create(json: JsonObject) =>
+        uri = ""
+        languageId = ""
+        version = 0
+        text = ""

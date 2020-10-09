@@ -1,6 +1,7 @@
 use "ponytest"
-use types = "types"
-use handlers = "handlers"
+use decoders = "package:decoders"
+use handlers = "package:handlers"
+use envelope = "package:envelope"
 
 actor Main is TestList
     new create(env: Env) =>
@@ -10,5 +11,6 @@ actor Main is TestList
         None
 
     fun tag tests(test: PonyTest) =>
-        types.Main.make().tests(test)
+        decoders.Main.make().tests(test)
         handlers.Main.make().tests(test)
+        envelope.Main.make().tests(test)
