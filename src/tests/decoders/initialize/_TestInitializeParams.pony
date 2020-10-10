@@ -1,6 +1,6 @@
 use "ponytest"
 use "json"
-use "../../types"
+use "../../../types"
 use "Debug"
 
 class _TestInitializeParams is UnitTest
@@ -18,7 +18,7 @@ class _TestInitializeParams is UnitTest
         | let data : InitializeParams =>
             h.assert_false(data.processId is None, "ProcessId is None") 
             h.assert_eq[I64](19480, try data.processId as I64 else 0 end, "No ProcessId found")
-            h.assert_false(data.clientInfo is None, "ClientInfo is None")        
+            h.assert_false(data.clientInfo is None, "ClientInfo is None")
         else
             h.fail("data is not of type InitializeParams")
         end

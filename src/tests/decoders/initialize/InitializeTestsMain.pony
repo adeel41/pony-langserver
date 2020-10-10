@@ -12,13 +12,8 @@ actor Main is TestList
         test(_TestClientInfo)
         test(_TestCompletionClientCapabilities)
         test(_TestCompletionClientCapabilitiesCompletionItem)
-        // test(_TestEvelopeCreate)
-        // test(_TestEnvelopeOpen)
-        // test(_TestHoverClientCapabilities)
-        // test(_TestInitializeParams)
-
-        // test(_TestRequestMessageCreate)
-        // test(_TestRequestMessageGetParams)
+        test(_TestInitializeParams)
+        test(_TestHoverClientCapabilities)
         test(_TestTextDocumentClientCapabilities)
         test(_TestTextDocumentSyncClientCapabilities)
         test(_TestWorkspace)
@@ -31,7 +26,6 @@ actor Main is TestList
         test(_TestImplementationClientCapabilities)
         test(_TestReferenceClientCapabilities)
         test(_TestDocumentHighlightClientCapabilities)
-
         test(_TestDocumentSymbolClientCapabilities)
         test(_TestCodeActionClientCapabilities)
         test(_TestCodeLensClientCapabilities)

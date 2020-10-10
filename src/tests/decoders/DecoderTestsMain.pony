@@ -12,3 +12,4 @@ actor Main is TestList
     fun tag tests(test: PonyTest) =>
         initialize.Main.make().tests(test)
         textDocument.Main.make().tests(test)
+        test(_TestRequestMessageCreate)
