@@ -1,4 +1,5 @@
 use "json"
+use "../../../../types"
 
 primitive TestData
     fun get_json() : ( JsonObject | None ) =>
@@ -7,4 +8,17 @@ primitive TestData
             let doc = JsonDoc
             doc.parse(content)?
             doc.data as JsonObject
+        end
+
+    fun get_params() : (JsonObject | None) =>
+        try 
+            let root = TestData.get_json() as JsonObject
+            (root.data("params")? as JsonObject)
+        end
+
+    fun get_textDocument() : (TextDocumentItem | None) =>
+        try 
+            let params = TestData.get_params() as JsonObject
+            let json = params.data("textDocument")? as JsonObject
+            TextDocumentItem(json)
         end

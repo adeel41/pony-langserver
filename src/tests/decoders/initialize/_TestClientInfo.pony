@@ -3,7 +3,7 @@ use "../../../types"
 
 class iso _TestClientInfo is UnitTest
 
-    fun name(): String => "types:ClientInfo"
+    fun name(): String => "decoders:initialize:ClientInfo"
     fun apply(h: TestHelper) =>
         let data': (ClientInfo | None) = TestData.getClientInfo()
         match data'

@@ -2,7 +2,7 @@ use "ponytest"
 use "../../../types"
 
 class iso _TestRenameClientCapabilities is UnitTest
-    fun name() : String => "types:RenameClientCapabilities"
+    fun name() : String => "decoders:initialize:RenameClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getRenameClientCapabilities()
         match data'

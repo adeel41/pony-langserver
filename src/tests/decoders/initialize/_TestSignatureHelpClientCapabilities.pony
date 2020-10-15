@@ -2,7 +2,7 @@ use "ponytest"
 use "../../../types"
 
 class iso _TestSignatureHelpClientCapabilities is UnitTest
-    fun name() : String => "types:SignatureHelpClientCapabilities"
+    fun name() : String => "decoders:initialize:SignatureHelpClientCapabilities"
     fun apply(h: TestHelper) =>
         let data' = TestData.getSignatureHelpClientCapabilities()
         match data'
