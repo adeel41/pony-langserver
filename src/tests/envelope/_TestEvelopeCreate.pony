@@ -6,7 +6,7 @@ use "Debug"
 class iso _TestEvelopeCreate is UnitTest
     let _content:String = """{"jsonrpc":"2.0","id":1,"method":"shutdown","params":null}"""
 
-    fun name(): String => "types:Envelope:Create"
+    fun name(): String => "envelope:Create"
 
     fun apply(h: TestHelper) =>
         let envelope = Envelope(_content.size().u16(), _content)

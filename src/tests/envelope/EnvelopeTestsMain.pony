@@ -9,4 +9,5 @@ actor Main is TestList
 
     fun tag tests(test: PonyTest) =>
        test(_TestEvelopeCreate)
-       test(_TestEnvelopeOpen)
+       test(_TestEnvelopeOpenRequestMessage)
+       test(_TestEnvelopeOpenNotification)       
