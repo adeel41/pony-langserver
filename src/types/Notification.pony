@@ -7,3 +7,11 @@ class Notification
     new create(json: JsonObject box) ? =>
         method = json.data("method")? as String
         _params = try json.data("params")? as JsonObject box else None end
+
+    fun get_params() : NotificationTypes =>
+        match method
+        | "initialized" => InitializedParams
+        | "textDocument/didOpen" => try DidOpenTextDocumentParams(_params as JsonObject box)? else None end
+        else
+            None
+        end

@@ -22,7 +22,7 @@ class TextDocumentItem
     The content of the opened text document.
     """
 
-    new create(json: JsonObject) =>
+    new create(json: JsonObject box) =>
         uri = try json.data("uri")? as String else "" end
         languageId = try json.data("languageId")? as String else "" end
         version = try json.data("version")? as I64 else 0 end
