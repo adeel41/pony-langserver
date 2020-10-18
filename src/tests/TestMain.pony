@@ -4,6 +4,7 @@ use handlers = "package:handlers"
 use envelope = "package:envelope"
 use request_messages = "package:request_messages"
 use notifications = "notifications"
+use raw_message_processing = "raw_message_processing"
 
 actor Main is TestList
     new create(env: Env) =>
@@ -18,3 +19,4 @@ actor Main is TestList
         envelope.Main.make().tests(test)
         request_messages.Main.make().tests(test)
         notifications.Main.make().tests(test)
+        raw_message_processing.Main.make().tests(test)

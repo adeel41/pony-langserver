@@ -29,13 +29,13 @@ class RawMessageProcessor
             _messageLength = USize.from[I32](try length.i32()? else 0 end)
         elseif ba.string(0,1) == "{" then
             let theMessage = ba.take(_messageLength).string()                
-            Debug("Message: " + theMessage )
+            //Debug("Message: " + theMessage )
             let envelope = Envelope(_messageLength.u16(), theMessage)
             match EnvelopProcessor.process(envelope)
             | let response_message: ResponseMessage =>
                 let sendEnvelope = Envelope.from_json(response_message.to_json())
                 let response = sendEnvelope.stringify()
-                Debug("Response: " + response + "\r\n")
+                //Debug("Response: " + response + "\r\n")
                 conn.write(response)
             end
         end
