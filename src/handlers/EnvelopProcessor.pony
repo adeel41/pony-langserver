@@ -1,6 +1,6 @@
-use "types"
-use "handlers"
+use "../types"
 
+//todo: This should not exist. This functionality should be in Envelope.
 primitive EnvelopProcessor
     fun process(envelope: Envelope) : (ResponseMessage | None) =>
         var message: (RequestMessage | Notification | None) = None
