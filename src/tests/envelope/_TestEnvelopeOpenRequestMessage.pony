@@ -1,5 +1,6 @@
 use "ponytest"
 use "../../types"
+use "../../server"
 
 class iso _TestEnvelopeOpenRequestMessage is UnitTest
     let _content:String = """{"jsonrpc":"2.0","id":1,"method":"shutdown","params":null}"""

@@ -1,6 +1,7 @@
 use "net"
 use "Debug"
-use "package:types"
+use "types"
+use "server"
 
 actor Main
     new create(env: Env) =>

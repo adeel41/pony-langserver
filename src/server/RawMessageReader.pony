@@ -4,14 +4,14 @@ use "json"
 use "../types"
 use "valbytes"
 
-class RawMessageHandler
+class RawMessageReader
     var _messageLength: USize = USize.from[I32](0)
     var _envelopes : (Array[Envelope] | None) = None
 
     fun get_message_size() : USize =>
         _messageLength
 
-    fun ref process(data: String val) =>
+    fun ref read(data: String val) =>
         let lines:Array[String] = data.split("\r\n")
 
         for line in lines.values() do             

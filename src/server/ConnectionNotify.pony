@@ -1,10 +1,9 @@
 use "net"
 use "Debug"
-use "package:types"
-use "handlers"
+use "../types"
 
 class LanguageServerTCPConnectionNotify is TCPConnectionNotify
-    let _rawMessageHandler: RawMessageHandler = RawMessageHandler 
+    let _messageReader: RawMessageReader = RawMessageReader 
 
     fun ref accepted(conn: TCPConnection ref) =>
     try
@@ -22,13 +21,13 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
 
     fun ref received(conn: TCPConnection ref, data: Array[U8] iso, times: USize) : Bool =>        
         let received_data = String.from_array(consume data)
-        _rawMessageHandler.process(received_data)
-        let envelopes' = _rawMessageHandler.get_envelopes()
+        _messageReader.read(received_data)
+        let envelopes' = _messageReader.get_envelopes()
         match envelopes'
         | let envelopes: Array[Envelope] =>
             for envelope in envelopes.values() do
                 Debug("Request: " + envelope.content)
-                match EnvelopProcessor.process(envelope)
+                match envelope.handle()
                 | let response_message: ResponseMessage =>
                     let sendEnvelope = Envelope.from_json(response_message.to_json())
                     let response = sendEnvelope.stringify()

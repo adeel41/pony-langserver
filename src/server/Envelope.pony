@@ -1,5 +1,7 @@
 use "Debug"
 use "json"
+use "../types"
+use "../handlers"
 
 class Envelope
     let length: U16
@@ -27,3 +29,19 @@ class Envelope
     fun stringify() : String =>
         "Content-Length: " + (length.string()) + "\r\n\r\n" + content
     
+    fun handle() : (ResponseMessage | None) =>
+        var message: (RequestMessage | Notification | None) = None
+        try 
+            message = open()?
+        else
+            return ResponseMessage.failed(1, ResponseError(ErrorCodes.parseError(), "parse error"))            
+        end
+
+        match message
+        | let rm: RequestMessage =>
+            return MessageHandlerFactory.handle(rm)
+        | let n: Notification =>
+            NotificationHandlerFactory.handle(n)
+        else
+            ResponseMessage.failed(2, ResponseError(ErrorCodes.internalError(), "Internal Error. Couldn't handle message request"))
+        end

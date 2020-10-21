@@ -1,10 +1,10 @@
 use "ponytest"
-use decoders = "package:decoders"
-use handlers = "package:handlers"
-use envelope = "package:envelope"
-use request_messages = "package:request_messages"
+use decoders = "decoders"
+use handlers = "handlers"
+use envelope = "envelope"
+use request_messages = "request_messages"
 use notifications = "notifications"
-use raw_message_parser = "raw_message_parser"
+use raw_message_reader = "raw_message_reader"
 
 actor Main is TestList
     new create(env: Env) =>
@@ -19,4 +19,4 @@ actor Main is TestList
         envelope.Main.make().tests(test)
         request_messages.Main.make().tests(test)
         notifications.Main.make().tests(test)
-        raw_message_parser.Main.make().tests(test)
+        raw_message_reader.Main.make().tests(test)
