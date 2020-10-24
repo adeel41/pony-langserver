@@ -19,7 +19,13 @@ class Envelope
 
     fun open() : (RequestMessage ref^ | Notification ref^) ? =>
         let doc = JsonDoc
-        doc.parse(content)?
+        try
+            doc.parse(content)?
+        else
+            (_, let errorMessage: String) = doc.parse_report()
+            Debug("JSON ERROR: " + errorMessage)
+        end
+
         if (doc.data as JsonObject).data.contains("id") then
             RequestMessage(doc.data as JsonObject)?            
         else
@@ -33,8 +39,8 @@ class Envelope
         var message: (RequestMessage | Notification | None) = None
         try 
             message = open()?
-        else
-            return ResponseMessage.failed(1, ResponseError(ErrorCodes.parseError(), "parse error"))            
+        // else
+        //     return ResponseMessage.failed(1, ResponseError(ErrorCodes.parseError(), "parse error"))            
         end
 
         match message
@@ -42,6 +48,6 @@ class Envelope
             return MessageHandlerFactory.handle(rm)
         | let n: Notification =>
             NotificationHandlerFactory.handle(n)
-        else
-            ResponseMessage.failed(2, ResponseError(ErrorCodes.internalError(), "Internal Error. Couldn't handle message request"))
+        // else
+        //     ResponseMessage.failed(2, ResponseError(ErrorCodes.internalError(), "Internal Error. Couldn't handle message request"))
         end

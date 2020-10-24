@@ -20,7 +20,7 @@ class RawMessageReader
                 ba = _process_line(ba.string())
             end
         end
-        true
+        
 
     fun ref _process_line(line: String) : ByteArrays =>
         let contentLengthText = "Content-Length: "
@@ -53,8 +53,8 @@ class RawMessageReader
             for v in envelopes'.values() do 
                 envelopes.push(v)
             end
-            result = envelopes.clone()
-        end
+            result = envelopes
         _envelopes = None
         _messageLength = USize.from[I32](0)
+        end
         result

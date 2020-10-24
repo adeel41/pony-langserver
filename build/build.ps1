@@ -17,10 +17,9 @@ function GetOneFolderUp($path) {
 }
 
 $rootFolder = GetOneFolderUp(GetOneFolderUp($MyInvocation.MyCommand.Definition))
-#$buildFolder = Join-Path $rootFolder "build"
-$srcFolder = Join-Path $rootFolder "src"
+$compilationFolder = Join-Path $rootFolder "src"
 if ($Operation -eq "test") {
-    $srcFolder = Join-Path $srcFolder "tests"
+    $compilationFolder = Join-Path $compilationFolder "tests"
 }
 $outFolder = Join-Path $rootFolder "out"
 
@@ -37,9 +36,7 @@ function RefreshEnvironmentPathVariable() {
 }
 
 
-#& corral run -- ponyc $srcFolder -b "pony-langserver" --define openssl_0.9.0  -o "out"
-& corral run -- ponyc $srcFolder -b "pony-langserver" --debug -o "out"
-#& ponyc.exe $srcFolder -b "pony-langserver" -o "out"
+& corral run -- ponyc $compilationFolder -b "pony-langserver" --debug -o "out"
 $executable = Join-Path $outFolder "pony-langserver.exe"
 
 if ($Operation -eq "run") {
