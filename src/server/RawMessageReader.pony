@@ -5,11 +5,11 @@ use "../types"
 use "valbytes"
 
 class RawMessageReader
-    var _messageLength: USize = USize.from[I32](0)
+    var _current_message: SizeRestrictedMessage = SizeRestrictedMessage(0)
     var _envelopes : (Array[Envelope] | None) = None
 
-    fun get_message_size() : USize =>
-        _messageLength
+    fun get_message_size() : I32 =>
+        _current_message.length.i32()
 
     fun ref read(data: String val) =>
         let lines:Array[String] = data.split("\r\n")
@@ -27,21 +27,27 @@ class RawMessageReader
         let contentLengthLength = contentLengthText.size()
 
         var ba = ByteArrays(line.array())
-        if ( ba.take(contentLengthLength).string() == contentLengthText) then
+        if ( ba.take(contentLengthLength).string() == contentLengthText) then            
             let length = ba.drop(contentLengthLength).string()
-            _messageLength = USize.from[I32](try length.i32()? else 0 end)
-        elseif ba.string(0,1) == "{" then
-            let theMessage = ba.take(_messageLength).string()
-            //Debug("Message: " + theMessage )
-
-            let envelope = Envelope(_messageLength.u16(), theMessage)
-            if _envelopes is None then
-                _envelopes = Array[Envelope](4)
+            _current_message = SizeRestrictedMessage(USize.from[I32](try length.i32()? else 0 end))
+            return ByteArrays
+        elseif line == "" then
+            return ByteArrays
+        else
+            (let completed, let extra) = _current_message.append(line)
+            if completed then
+                _add_envelope()
             end
-            try (_envelopes as Array[Envelope]).push(envelope) end
+            ba = extra
         end
-        ba = ba.drop(_messageLength)
         ba
+
+    fun ref _add_envelope() =>
+        let envelope = Envelope(_current_message.length.u16(), _current_message.get_content())
+        if _envelopes is None then
+            _envelopes = Array[Envelope](4)
+        end
+        try (_envelopes as Array[Envelope]).push(envelope) end
 
 
     fun ref get_envelopes() : ( Array[Envelope]^ | None ) =>
@@ -55,6 +61,5 @@ class RawMessageReader
             end
             result = envelopes
         _envelopes = None
-        _messageLength = USize.from[I32](0)
         end
         result

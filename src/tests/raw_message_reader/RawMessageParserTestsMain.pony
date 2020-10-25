@@ -8,6 +8,8 @@ actor Main is TestList
         None
 
     fun tag tests(test: PonyTest) =>
-       test(_TestContentLengthOnly)
-       test(_TestContentLengthThenMessage)
-       test(_TestMultipleEnvelopesInSingleRequest)
+        test(_TestContentLengthOnly)
+        test(_TestContentLengthThenMessage)
+        test(_TestMultipleEnvelopesInSingleRequest)
+        test(_TestSingleEnvelopeInMultipleRequests)
+        test(_TestSizeRestrictedMessage)

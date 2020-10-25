@@ -21,13 +21,12 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
 
     fun ref received(conn: TCPConnection ref, data: Array[U8] iso, times: USize) : Bool =>        
         let received_data = String.from_array(consume data)
-        Debug("DATA: " + received_data)
         _messageReader.read(received_data)
         let envelopes' = _messageReader.get_envelopes()
         match envelopes'
         | let envelopes: Array[Envelope] =>
             for envelope in envelopes.values() do
-                //Debug("Request: " + envelope.content)
+                Debug("Request: " + envelope.content)
                 match envelope.handle()
                 | let response_message: ResponseMessage =>
                     let sendEnvelope = Envelope.from_json(response_message.to_json())
