@@ -2,12 +2,13 @@ use "Debug"
 use "json"
 use "../types"
 use "../handlers"
+use model = "../model"
 
-class Envelope
+class val Envelope
     let length: U16
     let content: String
     
-    new create(length': U16, content': String) =>
+    new val create(length': U16, content': String) =>
         length = length'
         content = content'
 
@@ -35,7 +36,7 @@ class Envelope
     fun stringify() : String =>
         "Content-Length: " + (length.string()) + "\r\n\r\n" + content
     
-    fun handle() : (ResponseMessage | None) =>
+    fun handle(app: model.App) : (ResponseMessage | None) =>
         var message: (RequestMessage | Notification | None) = None
         try 
             message = open()?
@@ -45,9 +46,9 @@ class Envelope
 
         match message
         | let rm: RequestMessage =>
-            return MessageHandlerFactory.handle(rm)
+            return MessageHandlerFactory.handle(app, rm)
         | let n: Notification =>
-            NotificationHandlerFactory.handle(n)
+            NotificationHandlerFactory.handle(app, n)
         // else
         //     ResponseMessage.failed(2, ResponseError(ErrorCodes.internalError(), "Internal Error. Couldn't handle message request"))
         end

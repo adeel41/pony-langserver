@@ -12,5 +12,5 @@ class _TestContentLengthThenMessage is UnitTest
 
         h.assert_eq[I32](2976, reader.get_message_size().i32())        
         h.assert_eq[I32](1, try 
-            (reader.get_envelopes() as Array[Envelope]).size().i32()
+            (reader.get_envelopes() as Array[Envelope] val).size().i32()
         else 0 end)

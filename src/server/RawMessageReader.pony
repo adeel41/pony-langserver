@@ -6,7 +6,7 @@ use "valbytes"
 
 class RawMessageReader
     var _current_message: SizeRestrictedMessage = SizeRestrictedMessage(0)
-    var _envelopes : (Array[Envelope] | None) = None
+    var _envelopes : (Array[Envelope] iso | None) = None
 
     fun get_message_size() : I32 =>
         _current_message.length.i32()
@@ -45,21 +45,16 @@ class RawMessageReader
     fun ref _add_envelope() =>
         let envelope = Envelope(_current_message.length.u16(), _current_message.get_content())
         if _envelopes is None then
-            _envelopes = Array[Envelope](4)
+            _envelopes = recover Array[Envelope](4) end
         end
-        try (_envelopes as Array[Envelope]).push(envelope) end
+        try (_envelopes as Array[Envelope] iso).push(envelope) end
 
 
-    fun ref get_envelopes() : ( Array[Envelope]^ | None ) =>
-        var result: ( Array[Envelope]^ | None ) = None
+    fun ref get_envelopes() : ( Array[Envelope] val | None ) =>
+        var result: ( Array[Envelope] val | None ) = None
         
         match _envelopes
-        | let envelopes' : Array[Envelope] =>
-            let envelopes = Array[Envelope]
-            for v in envelopes'.values() do 
-                envelopes.push(v)
-            end
-            result = envelopes
-        _envelopes = None
+        | let envelopes' : Array[Envelope] iso! =>
+            result = _envelopes = None
         end
-        result
+        consume result

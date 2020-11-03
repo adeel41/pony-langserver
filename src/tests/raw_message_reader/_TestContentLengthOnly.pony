@@ -10,6 +10,6 @@ class _TestContentLengthOnly is UnitTest
         reader.read(TestData.message1())
         h.assert_eq[I32](2976, reader.get_message_size().i32())
         h.assert_eq[I32](0, try 
-            (reader.get_envelopes() as Array[Envelope]).size().i32()
+            (reader.get_envelopes() as Array[Envelope] val).size().i32()
         else 0 end)
 

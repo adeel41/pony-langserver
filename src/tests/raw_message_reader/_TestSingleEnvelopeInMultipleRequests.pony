@@ -18,7 +18,7 @@ class _TestSingleEnvelopeInMultipleRequests is UnitTest
 
     fun get_total_envelopes(reader: RawMessageReader) : I32 =>
         try 
-            (reader.get_envelopes() as Array[Envelope]).size().i32()
+            (reader.get_envelopes() as Array[Envelope] val).size().i32()
         else 
             0 
         end

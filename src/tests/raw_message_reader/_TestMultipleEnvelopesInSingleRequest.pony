@@ -10,5 +10,5 @@ class _TestMultipleEnvelopesInSingleRequest is UnitTest
         reader.read(TestData.message5())
         
         h.assert_eq[I32](2, try 
-            (reader.get_envelopes() as Array[Envelope]).size().i32()
+            (reader.get_envelopes() as Array[Envelope] val).size().i32()
         else 0 end)

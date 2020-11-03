@@ -1,5 +1,6 @@
 use "../types"
+use model = "../model"
 
 primitive NotificationHandlerFactory
-    fun handle(message: Notification) =>
+    fun handle(app: model.App, message: Notification) =>
         None

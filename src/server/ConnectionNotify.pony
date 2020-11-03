@@ -1,9 +1,11 @@
 use "net"
 use "Debug"
 use "../types"
+use model = "../model"
 
 class LanguageServerTCPConnectionNotify is TCPConnectionNotify
-    let _messageReader: RawMessageReader = RawMessageReader 
+    let _messageReader: RawMessageReader = RawMessageReader
+    var _app : model.App = model.App
 
     fun ref accepted(conn: TCPConnection ref) =>
     try
@@ -24,18 +26,9 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
         _messageReader.read(received_data)
         let envelopes' = _messageReader.get_envelopes()
         match envelopes'
-        | let envelopes: Array[Envelope] =>
-            for envelope in envelopes.values() do
-                Debug("Request: " + envelope.content)
-                match envelope.handle()
-                | let response_message: ResponseMessage =>
-                    let sendEnvelope = Envelope.from_json(response_message.to_json())
-                    let response = sendEnvelope.stringify()
-                    Debug("Response: " + response + "\r\n")
-                    conn.write(response)
-                end
-            end
-
+        | let envelopes: Array[Envelope] val =>            
+            Postman.deliver(envelopes, conn, _app)
+            Debug("Client: " + try (_app.client as model.Client).name else "" end )
         end
         false
 
