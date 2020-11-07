@@ -1,18 +1,25 @@
+use "collections"
 use "../types"
 use model = "../model"
 
 primitive InitializeHandler
     fun handle(app: model.App, params: InitializeParams, requestId: I64) : ResponseMessage =>
 
-        (let name, let version) = 
-            match params.clientInfo
+        let client = match params.clientInfo
             | let clientInfo: ClientInfo =>
-                (clientInfo.name, try clientInfo.version as String else "" end)
+                model.Client(clientInfo.name, try clientInfo.version as String else "" end)
             else
-                ("", "")
+                model.Client.empty()
             end
 
-        app.setClient(name, version)
+        let workspace = match params.rootPath
+            | let rootPath: String =>
+                let rootUri = try params.rootUri as String else "" end
+                let name = try (params.workspaceFolders as Array[WorkspaceFolder])(0)?.name else "" end
+                model.Workspace(name, rootPath, rootUri)
+        end
+
+        app.initialize(client, workspace)
 
         let textDocumentSync = TextDocumentSyncOptions(true, TextDocumentSyncKindFull)
         let capabilities = ServerCapabilities(textDocumentSync)

@@ -10,7 +10,7 @@ class iso _TestClientInfo is UnitTest
         | let data: ClientInfo =>
             h.assert_eq[String]("vscode", data.name)
             h.assert_false(data.version is None, "version is None")
-            h.assert_eq[String]("1.47.3", try data.version as String else "" end)
+            h.assert_eq[String]("1.50.1", try data.version as String else "" end)
         else
             h.fail("data is not of type ClientInfo")
         end

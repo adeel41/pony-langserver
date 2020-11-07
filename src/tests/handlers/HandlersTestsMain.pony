@@ -9,3 +9,4 @@ actor Main is TestList
 
     fun tag tests(test: PonyTest) =>
         test(_MessageHandlerFactoryInitializeTest)
+        test(_TestInitializeHandler)

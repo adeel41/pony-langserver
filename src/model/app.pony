@@ -1,6 +1,6 @@
 class App
     var client: ( Client | None )
-    let workspace: (Workspace | None)
+    var workspace: (Workspace | None)
     let documents: Array[Document]
     let activeDocument: (Document | None)
 
@@ -10,8 +10,10 @@ class App
         documents = Array[Document](0)
         activeDocument = None
 
-    fun ref setClient(name: String, version: String) =>
-        client = Client(name, version)
+    fun ref initialize(client': Client, workspace': (Workspace | None)) =>
+        client = client'
+        workspace = workspace'
+
 
 class Workspace
     let name: String
@@ -30,6 +32,10 @@ class Client
     new create(name': String, version': String) =>
         name = name'
         version = version'
+
+    new empty() =>
+        name = ""
+        version = ""
 
 class Document
     let name: String

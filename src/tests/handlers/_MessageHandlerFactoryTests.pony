@@ -1,12 +1,15 @@
 use "ponytest"
 use "../../types"
 use "../../handlers"
+use model = "../../model"
 use "json"
 
 class iso _MessageHandlerFactoryInitializeTest is UnitTest
 
     fun name() : String => "handlers:MessageHandlerFactory:Initialize"
     fun apply(h: TestHelper) =>
+        let app : model.App = model.App
+
         let obj = JsonObject
         obj.data("id") = I64(1)
         obj.data("method") = "initialize"
@@ -21,7 +24,7 @@ class iso _MessageHandlerFactoryInitializeTest is UnitTest
 
         match request'
         | let request: RequestMessage =>
-            let response = MessageHandlerFactory.handle(request)
+            let response = MessageHandlerFactory.handle(app, request)
             match response.result
             | let result: InitializeResult =>
                 None

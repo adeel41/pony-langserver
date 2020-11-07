@@ -2,6 +2,7 @@ use "ponytest"
 use "json"
 use "../../../types"
 use "Debug"
+use "collections"
 
 class _TestInitializeParams is UnitTest
     let _msg: String = """
@@ -17,8 +18,9 @@ class _TestInitializeParams is UnitTest
         match data'
         | let data : InitializeParams =>
             h.assert_false(data.processId is None, "ProcessId is None") 
-            h.assert_eq[I64](19480, try data.processId as I64 else 0 end, "No ProcessId found")
+            h.assert_eq[I64](19800, try data.processId as I64 else 0 end, "No ProcessId found")
             h.assert_false(data.clientInfo is None, "ClientInfo is None")
+            h.assert_eq[I64](1, try (data.workspaceFolders as Array[WorkspaceFolder]).size().i64() else 0 end )
         else
             h.fail("data is not of type InitializeParams")
         end
