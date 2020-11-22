@@ -17,5 +17,5 @@ class _DidOpenTextDocumentTests is UnitTest
                 let textDocumentJson = params.data("textDocument")? as JsonObject
                 textDocumentJson.data("text")? as String
         else "" end
-        parsing.PonyDocumentParser.parse(content)
+        //parsing.PonyDocumentParser.parse(content)
         //todo: use parser to read content and extract class name. and set active document

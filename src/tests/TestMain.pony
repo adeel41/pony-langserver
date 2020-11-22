@@ -5,6 +5,7 @@ use envelope = "envelope"
 use request_messages = "request_messages"
 use notifications = "notifications"
 use raw_message_reader = "raw_message_reader"
+use parsing = "parsing"
 
 actor Main is TestList
     new create(env: Env) =>
@@ -20,3 +21,4 @@ actor Main is TestList
         request_messages.Main.make().tests(test)
         notifications.Main.make().tests(test)
         raw_message_reader.Main.make().tests(test)
+        parsing.Main.make().tests(test)
