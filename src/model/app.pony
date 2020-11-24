@@ -1,29 +1,31 @@
 class App
-    var client: ( Client | None )
-    var workspace: (Workspace | None)
-    let documents: Array[Document]
+    var _client: ( Client | None )
+    var _workspace: (Workspace | None)
     let activeDocument: (Document | None)
 
     new create() =>
-        client = None
-        workspace = None
-        documents = Array[Document](0)
+        _client = None
+        _workspace = None
         activeDocument = None
 
     fun ref initialize(client': Client, workspace': (Workspace | None)) =>
-        client = client'
-        workspace = workspace'
+        _client = client'
+        _workspace = workspace'
+
+    fun get_client() : Client box ? => _client as Client box
 
 
 class Workspace
     let name: String
     let rootPath : String
     let rootUri : String
+    let documents: Array[Document]
 
     new create(name': String, rootPath': String, rootUri': String) =>
         name = name'
         rootPath = rootPath'
         rootUri = rootUri'
+        documents = Array[Document](0)
 
 class Client
     let name: String
@@ -45,6 +47,8 @@ class Document
         name = name'
         documentType = documentType'
 
+primitive DocumentTypeCorralLock
+primitive DocumentTypeCorral
 primitive DocumentTypePony
 primitive DocumentTypeOther
-type DocumentType is (DocumentTypePony | DocumentTypeOther)
+type DocumentType is (DocumentTypePony | DocumentTypeOther | DocumentTypeCorral | DocumentTypeCorralLock)

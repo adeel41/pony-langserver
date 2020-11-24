@@ -28,7 +28,6 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
         match envelopes'
         | let envelopes: Array[Envelope] val =>            
             Postman.deliver(envelopes, conn, _app)
-            Debug("Client: " + try (_app.client as model.Client).name else "" end )
         end
         false
 

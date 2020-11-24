@@ -16,6 +16,9 @@ primitive InitializeHandler
             | let rootPath: String =>
                 let rootUri = try params.rootUri as String else "" end
                 let name = try (params.workspaceFolders as Array[WorkspaceFolder])(0)?.name else "" end
+                //we have the path. send this path. and a notfication thing.
+                // that notification will 
+                // model.DocumentsFetcher
                 model.Workspace(name, rootPath, rootUri)
         end
 

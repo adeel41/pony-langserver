@@ -4,10 +4,10 @@
       "locator": "github.com/ponylang/peg.git"
     },
     {
-      "locator": "D:\\Coding\\Pony\\ponycc\\"
+      "locator": "github.com/ponylang/glob.git"
     },
     {
-      "locator": "github.com/ponylang/glob.git"
+      "locator": "github.com/adeel41/ponycc.git"
     },
     {
       "locator": "github.com/ponylang/valbytes.git"
