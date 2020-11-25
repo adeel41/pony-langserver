@@ -4,7 +4,7 @@ use "../types"
 use model = "../model"
 
 primitive Postman
-    fun deliver(envelopes: Array[Envelope val] val, conn : TCPConnection, app: model.App) =>
+    fun deliver(envelopes: Array[Envelope val] val, conn : TCPConnection, app: model.App, env: Env) =>
         for envelope in envelopes.values() do
             Debug("Request: " + envelope.content)
             match envelope.handle(app)

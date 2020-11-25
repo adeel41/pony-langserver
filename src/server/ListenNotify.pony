@@ -2,9 +2,14 @@ use "net"
 use "Debug"
 
 class LanguageServerTCPListenNotify is TCPListenNotify
+    let _env: Env
+
+    new create(env: Env) =>
+        _env = env
+
     fun ref connected(listen: TCPListener ref) : TCPConnectionNotify iso^ =>
         Debug("PLS: Connected")
-        LanguageServerTCPConnectionNotify
+        LanguageServerTCPConnectionNotify(_env)
 
     fun ref listening(listen: TCPListener ref) : None val =>
         Debug("PLS: Server Listening...")

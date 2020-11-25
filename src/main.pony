@@ -9,7 +9,7 @@ actor Main
         env.out.print("Starting Pony Language Server on port: " + port)
         try
             TCPListener( env.root as AmbientAuth, 
-                recover LanguageServerTCPListenNotify end,
+                recover LanguageServerTCPListenNotify(env) end,
                 "127.0.0.1",
                 port
             )

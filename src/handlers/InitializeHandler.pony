@@ -19,6 +19,7 @@ primitive InitializeHandler
                 //we have the path. send this path. and a notfication thing.
                 // that notification will 
                 // model.DocumentsFetcher
+                // find all files. then foreach.
                 model.Workspace(name, rootPath, rootUri)
         end
 

@@ -4,8 +4,12 @@ use "../types"
 use model = "../model"
 
 class LanguageServerTCPConnectionNotify is TCPConnectionNotify
+    let _env: Env
     let _messageReader: RawMessageReader = RawMessageReader
     var _app : model.App = model.App
+
+    new iso create(env: Env) =>
+        _env = env
 
     fun ref accepted(conn: TCPConnection ref) =>
     try
@@ -27,7 +31,7 @@ class LanguageServerTCPConnectionNotify is TCPConnectionNotify
         let envelopes' = _messageReader.get_envelopes()
         match envelopes'
         | let envelopes: Array[Envelope] val =>            
-            Postman.deliver(envelopes, conn, _app)
+            Postman.deliver(envelopes, conn, _app, _env)
         end
         false
 
